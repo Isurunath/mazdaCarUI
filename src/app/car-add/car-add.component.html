@@ -1,0 +1,8 @@
+<form [formGroup]="carForm" (ngSubmit)="onFormSubmit()">
+    Model: <input formControlName="model" placeholder="Enter Model">
+    Year Manufactured: <input formControlName="yearManufactured" placeholder="Enter Year Manufactured">
+    Color: <input formControlName="color" placeholder="Enter Color">
+    Engine Transmission: <input formControlName="engineTransmission" placeholder="Enter Engine Transmission">
+    Plate No: <input formControlName="plateNo" placeholder="Enter Plate No">
+    <button type="submit">Submit</button>
+</form>

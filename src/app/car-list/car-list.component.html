@@ -1,0 +1,33 @@
+<div  *ngIf="!updateCarEnable">
+    <div *ngFor="let c of carList">
+        <div>
+            <span>ID</span>
+            <span>{{c.id}}</span>
+        </div>
+        <div>
+            <span>Model</span>
+            <span>{{c.model}}</span>
+        </div>
+        <div>
+            <span>Year Manufactured</span>
+            <span>{{c.yearManufactured}}</span>
+        </div>
+        <div>
+            <span>Color</span>
+            <span>{{c.color}}</span>
+        </div>
+        <div>
+            <span>Engine Transmission</span>
+            <span>{{c.engineTransmission}}</span>
+        </div>
+        <div>
+            <span>Plate Number</span>
+            <span>{{c.plateNo}}</span>
+        </div>
+        <div>
+            <button type="button" (click)="updateCar(c.id)">Update</button>
+        </div>
+    </div>
+</div>
+
+<app-car-update *ngIf="updateCarEnable" [carID]="updateCarId"></app-car-update>
