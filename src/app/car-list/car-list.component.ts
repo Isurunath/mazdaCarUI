@@ -10,15 +10,17 @@ import { Router } from '@angular/router';
 })
 export class CarListComponent implements OnInit {
 
-  constructor(private carService: CarService,
+  public carList: Car[] = [];
+
+  constructor(
+    private carService: CarService,
     private router: Router) { }
 
   ngOnInit(): void {
     this.getCarList();
   }
 
-  public carList: Car[] = [];
-
+  //Load car list
   getCarList(): void {
     this.carService.getAllCars()
       .subscribe(
@@ -31,6 +33,7 @@ export class CarListComponent implements OnInit {
         });
   }
 
+  //On update Button Click
   updateCar(carID:any){
     this.router.navigate(['/carupdate',carID]);
   }

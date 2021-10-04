@@ -12,20 +12,21 @@ import { Router } from '@angular/router';
 })
 export class CarUpdateComponent implements OnInit {
 
-  carID !: number;
-
   public carForm!: FormGroup;
   public car!: Car;
+  public carID !: number;
   public duplicatePlateNo: boolean = false;
-  previousPlateNo !: String;
-  numberRegEx = /\-?\d*\.?\d{1,2}/;
+  public previousPlateNo !: String;
+  public numberRegEx = /\-?\d*\.?\d{1,2}/;
 
-  constructor(private carService: CarService,
+  constructor(
+    private carService: CarService,
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router) { }
 
   ngOnInit(): void {
+    //Get Car ID from URL
     this.route.params.subscribe(params => {
       this.carID = +params['id'];
     });
@@ -43,6 +44,7 @@ export class CarUpdateComponent implements OnInit {
     })
   }
 
+  //Load update form data
   loadFormData() {
     this.carService.getCarByID(this.carID)
       .subscribe(
@@ -64,6 +66,7 @@ export class CarUpdateComponent implements OnInit {
   }
 
   onFormSubmit(): void {
+    // check whether the user have changed the plate number and if so check whether  is the new plate number already exist in DB
     if (this.previousPlateNo != this.carForm.get('plateNo')?.value) {
       this.carService.getCarByPlateID(this.carForm.get('plateNo')?.value)
         .subscribe(
@@ -83,6 +86,7 @@ export class CarUpdateComponent implements OnInit {
     }
   }
 
+  //Update Car Details
   updateCar() {
     this.car = {
       id: this.carID,
@@ -93,11 +97,9 @@ export class CarUpdateComponent implements OnInit {
       plateNo: this.carForm.get('plateNo')?.value,
     }
     console.log(this.car);
-
     this.carService.updateCar(this.car)
       .subscribe(
         response => {
-          console.log(response);
           this.router.navigateByUrl('/carlist');
         },
         error => {
@@ -106,7 +108,8 @@ export class CarUpdateComponent implements OnInit {
 
   }
 
-  back(){
+  //on back button click
+  back() {
     this.router.navigateByUrl('/carlist');
   }
 

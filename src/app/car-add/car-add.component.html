@@ -8,7 +8,7 @@
                 Model is required.
             </div>
             <div *ngIf="carForm.controls['model'].errors?.maxlength">
-               Model should be less than 15 characters.
+                Model should be less than 15 characters.
             </div>
         </div>
     </div>
@@ -22,7 +22,7 @@
             </div>
             <div *ngIf="carForm.controls['yearManufactured'].errors?.maxlength">
                 Model should be less than 4 numbers.
-             </div>
+            </div>
             <div *ngIf="carForm.controls['yearManufactured'].errors?.pattern">
                 Only numbers are allowed.
             </div>
@@ -37,7 +37,7 @@
                 Color is required.
             </div>
             <div *ngIf="carForm.controls['color'].errors?.maxlength">
-               Color should be less than 10 characters.
+                Color should be less than 10 characters.
             </div>
         </div>
     </div>
@@ -45,7 +45,7 @@
         <label>Engine Transmission</label>
         <select class=" form-control" id="engine" formControlName="engineTransmission">
             <option value="auto">Auto</option>
-            <option value="manuak">Manual</option>
+            <option value="manual">Manual</option>
         </select>
         <div *ngIf="carForm.controls['engineTransmission'].invalid && (carForm.controls['engineTransmission'].dirty || carForm.controls['engineTransmission'].touched)"
             class="alert alert-danger">
@@ -66,7 +66,7 @@
                 Plate No should be less than 10 characters.
             </div>
         </div>
-        <div *ngIf="duplicatePlateNo"  class="alert alert-danger">
+        <div *ngIf="duplicatePlateNo" class="alert alert-danger">
             This plate number already exist. Please enter another number.
         </div>
     </div>

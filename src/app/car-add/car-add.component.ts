@@ -10,12 +10,14 @@ import { CarService } from '../services/car.service';
   styleUrls: ['./car-add.component.css']
 })
 export class CarAddComponent implements OnInit {
+
   public carForm!: FormGroup;
   public car!: Car;
   public duplicatePlateNo: Boolean = false;
   numberRegEx = /\-?\d*\.?\d{1,2}/;
 
-  constructor(private carService: CarService,
+  constructor(
+    private carService: CarService,
     private formBuilder: FormBuilder,
     private router: Router) { }
 
@@ -34,13 +36,8 @@ export class CarAddComponent implements OnInit {
     })
   }
 
-
-
+  //On save button click
   onFormSubmit(): void {
-    if (!this.carForm.valid) {
-      return;
-    }
-
     this.car = {
       model: this.carForm.get('model')?.value,
       yearManufactured: this.carForm.get('yearManufactured')?.value,
@@ -50,7 +47,7 @@ export class CarAddComponent implements OnInit {
     }
 
     console.log(this.car);
-
+    //check plate number already exist in DB
     this.carService.getCarByPlateID(this.car.plateNo)
       .subscribe(
         response => {
@@ -58,7 +55,6 @@ export class CarAddComponent implements OnInit {
             this.carService.saveCar(this.car)
               .subscribe(
                 response => {
-                  console.log(response);
                   this.initForm();
                   this.router.navigateByUrl('/carlist');
                 },
@@ -73,8 +69,6 @@ export class CarAddComponent implements OnInit {
         error => {
           console.log(error);
         });
-
-
   }
 
 }
