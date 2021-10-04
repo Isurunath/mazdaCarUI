@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Car } from '../model/car.model';
 import { CarService } from '../services/car.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-car-list',
@@ -8,10 +9,9 @@ import { CarService } from '../services/car.service';
   styleUrls: ['./car-list.component.css']
 })
 export class CarListComponent implements OnInit {
-  updateCarEnable: Boolean = false;
-  updateCarId !: number;
 
-  constructor(private carService: CarService) { }
+  constructor(private carService: CarService,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.getCarList();
@@ -32,7 +32,6 @@ export class CarListComponent implements OnInit {
   }
 
   updateCar(carID:any){
-    this.updateCarEnable = true;
-    this.updateCarId = carID;
+    this.router.navigate(['/carupdate',carID]);
   }
 }

@@ -27,4 +27,8 @@ export class CarService {
   getCarByID(carID: number): Observable<any> {
     return this.httpClient.get(`${baseURL}/${carID}`);
   }
+
+  getCarByPlateID(plateID: String): Observable<any> {
+    return this.httpClient.get(`${baseURL}/plate/${plateID}`);
+  }
 }

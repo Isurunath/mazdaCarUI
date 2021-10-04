@@ -1,8 +1,77 @@
 <form [formGroup]="carForm" (ngSubmit)="onFormSubmit()">
-    Model: <input formControlName="model" placeholder="Enter Model">
-    Year Manufactured: <input formControlName="yearManufactured" placeholder="Enter Year Manufactured">
-    Color: <input formControlName="color" placeholder="Enter Color">
-    Engine Transmission: <input formControlName="engineTransmission" placeholder="Enter Engine Transmission">
-    Plate No: <input formControlName="plateNo" placeholder="Enter Plate No">
-    <button type="submit">Submit</button>
+    <div class="gapHeight form-group">
+        <label>Model</label>
+        <input type="text" class="form-control" id="model" formControlName="model">
+        <div *ngIf="carForm.controls['model'].invalid && (carForm.controls['model'].dirty || carForm.controls['model'].touched)"
+            class="alert alert-danger">
+            <div *ngIf="carForm.controls['model'].errors?.required">
+                Model is required.
+            </div>
+            <div *ngIf="carForm.controls['model'].errors?.maxlength">
+               Model should be less than 15 characters.
+            </div>
+        </div>
+    </div>
+    <div class="gapHeight form-group">
+        <label>Year Manufactured</label>
+        <input type="text" class="form-control" id="yearMan" formControlName="yearManufactured">
+        <div *ngIf="carForm.controls['yearManufactured'].invalid && (carForm.controls['yearManufactured'].dirty || carForm.controls['yearManufactured'].touched)"
+            class="alert alert-danger">
+            <div *ngIf="carForm.controls['yearManufactured'].errors?.required">
+                Year Manufactured is required.
+            </div>
+            <div *ngIf="carForm.controls['yearManufactured'].errors?.maxlength">
+                Model should be less than 4 numbers.
+             </div>
+            <div *ngIf="carForm.controls['yearManufactured'].errors?.pattern">
+                Only numbers are allowed.
+            </div>
+        </div>
+    </div>
+    <div class="gapHeight form-group">
+        <label>Color</label>
+        <input type="text" class="form-control" id="color" formControlName="color">
+        <div *ngIf="carForm.controls['color'].invalid && (carForm.controls['color'].dirty || carForm.controls['color'].touched)"
+            class="alert alert-danger">
+            <div *ngIf="carForm.controls['color'].errors?.required">
+                Color is required.
+            </div>
+            <div *ngIf="carForm.controls['color'].errors?.maxlength">
+               Color should be less than 10 characters.
+            </div>
+        </div>
+    </div>
+    <div class="gapHeight form-group">
+        <label>Engine Transmission</label>
+        <select class=" form-control" id="engine" formControlName="engineTransmission">
+            <option value="auto">Auto</option>
+            <option value="manuak">Manual</option>
+        </select>
+        <div *ngIf="carForm.controls['engineTransmission'].invalid && (carForm.controls['engineTransmission'].dirty || carForm.controls['engineTransmission'].touched)"
+            class="alert alert-danger">
+            <div *ngIf="carForm.controls['engineTransmission'].errors?.required">
+                Engine Transmission is required.
+            </div>
+        </div>
+    </div>
+    <div class="gapHeight form-group">
+        <label>Plate No</label>
+        <input type="text" class="form-control" id="plateno" formControlName="plateNo">
+        <div *ngIf="carForm.controls['plateNo'].invalid && (carForm.controls['plateNo'].dirty || carForm.controls['plateNo'].touched)"
+            class="alert alert-danger">
+            <div *ngIf="carForm.controls['plateNo'].errors?.required">
+                Plate No is required.
+            </div>
+            <div *ngIf="carForm.controls['plateNo'].errors?.maxlength">
+                Plate No should be less than 10 characters.
+            </div>
+        </div>
+        <div *ngIf="duplicatePlateNo"  class="alert alert-danger">
+            This plate number already exist. Please enter another number.
+        </div>
+    </div>
+    <div class="gapHeight form-group">
+        <button [disabled]="!carForm.valid" type="submit" class="btn btn-primary">Update</button>
+        <button  (click)="back()" class="btn btn-primary backBtn">Back</button>
+    </div>
 </form>
